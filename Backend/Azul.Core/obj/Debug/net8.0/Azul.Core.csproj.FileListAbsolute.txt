@@ -1,0 +1,15 @@
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\bin\Debug\net8.0\Azul.Core.deps.json
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\bin\Debug\net8.0\Azul.Core.dll
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\bin\Debug\net8.0\Azul.Core.pdb
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\bin\Debug\net8.0\Azul.Core.xml
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\Azul.Core.csproj.AssemblyReference.cache
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\Azul.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\Azul.Core.AssemblyInfoInputs.cache
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\Azul.Core.AssemblyInfo.cs
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\Azul.Core.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\Azul.Core.sourcelink.json
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\Azul.Core.dll
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\refint\Azul.Core.dll
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\Azul.Core.xml
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\Azul.Core.pdb
+C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend\Azul.Core\obj\Debug\net8.0\ref\Azul.Core.dll

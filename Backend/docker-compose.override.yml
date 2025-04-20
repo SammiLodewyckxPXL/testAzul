@@ -1,0 +1,27 @@
+services:
+  azul.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__AzulDbConnection=Data Source=sqldata;Database=AzulDockerDb;User Id=sa;Password=Pass@word;TrustServerCertificate=True;
+    ports:
+      - "5050:8080"
+      - "5051:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433" #make db server accessible for host system on port 1433(Server name: localhost)
+    volumes:
+      - azul-sqldata:/var/opt/mssql
+volumes:
+  azul-sqldata:
+    external: false
