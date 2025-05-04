@@ -1,0 +1,71 @@
+name: dockercompose9499599313622687294
+services:
+  azul.api:
+    build:
+      context: C:\Users\lenovo\Documents\PXL\projectAzul\project-2425-azul-azul21\Backend
+      dockerfile: Azul.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+      ConnectionStrings__AzulDbConnection: Data Source=sqldata;Database=AzulDockerDb;User Id=sa;Password=Pass@word;TrustServerCertificate=True;
+    image: azulapi
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "5050"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "5051"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\lenovo\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\lenovo\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\lenovo\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\lenovo\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  sqldata:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Pass@word
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1433"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: azul-sqldata
+        target: /var/opt/mssql
+        volume: {}
+networks:
+  default:
+    name: dockercompose9499599313622687294_default
+volumes:
+  azul-sqldata:
+    name: dockercompose9499599313622687294_azul-sqldata

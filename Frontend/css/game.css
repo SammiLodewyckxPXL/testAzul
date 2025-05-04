@@ -1,0 +1,158 @@
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: solid black 8px;
+    background-color: #243b53;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+nav img {
+    height: 60px;
+    width: auto;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: lightgrey;
+    color: blue;
+    margin: 0;
+    padding: 0;
+    padding-top: 80px;
+}
+
+/* kop */
+h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* container voor alle borden */
+.boards-container {
+    display: grid;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+    left: 0;
+    grid-template-areas:
+        "left1 . right1"
+        "left2 . right2";
+}
+
+#board1 { grid-area: left1; }
+#board3 { grid-area: left2; }
+#board2 { grid-area: right1; }
+#board4 { grid-area: right2; }
+
+
+/* individueel bord */
+.azul-board {
+    display: grid;
+    grid-template-columns: auto auto;
+    transform: scale(0.7);
+    transform-origin: top left;
+    left: 0;
+    /* nieuwe stijl: rand en achtergrondkleur */
+    background-color: #ffffff;
+    border: 3px solid #102a43;
+    border-radius: 12px;
+    padding: 7px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+}
+
+/* patroonlijnen links */
+.pattern-lines {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    margin-left: 30px;
+}
+
+.pattern-line {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* tegelstijl */
+.tile {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #888;
+    background-color: #ccc;
+    margin-right: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* muur rechts */
+.wall {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-template-rows: repeat(5, 60px);
+    gap: 5px;
+}
+
+/* vloerregel onderaan */
+.floor-line {
+    margin-top: 40px;
+    display: flex;
+    gap: 8px;
+    margin-left: 30px;
+}
+.factory-area {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+    width: 10%;
+    margin-left: 700px;
+    margin-top: -350px;
+}
+.factory-displays {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 fabrieken naast elkaar */
+    gap: 25px;
+}
+
+.factory {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #eee 50%, #aaa 100%);
+    border-radius: 50%;
+    border: 3px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.factory-tile {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    margin: 2px;
+    border-radius: 6px;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+}
+.boards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr auto;  /* Voeg een extra rij toe voor de fabrieken */
+    gap: 60px;
+    padding: 40px;
+    height: calc(100vh - 80px); /* Dit zorgt ervoor dat de borden netjes in het scherm passen */
+    box-sizing: border-box;
+}
+
+.playerInfo {
+    grid-column: span 2; /* Make the player info span both columns */
+    padding: 10px 0;
+    background-color: #f1f1f1;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Space between player info and game grid */
+    text-align: center; /* Optional: Align text in player info */
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+    <link rel="stylesheet" href="../css/game.css">
+    <script defer src="../js/game.js"></script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><img src="../images/azul.png" alt="Logo"></li>
+    </ul>
+</nav>
+
+<h1>Azul Borden</h1>
+
+<div class="boards-container" id="board1">
+    <!-- Herhaal het bord 4 keer -->
+    <div class="azul-board">
+        <div class="playerInfo">
+            <h3 class="player-name" id="playerName1"></h3>
+            <h3 class="player-score" id="playerScore1"></h3>
+        </div>
+        <div class="pattern-lines">
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div></div>
+        </div>
+        <div class="wall">
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+        </div>
+        <div class="floor-line">
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+        </div>
+    </div>
+
+    <!-- Tweede bord -->
+    <div class="azul-board" id="board2">
+        <!-- Zelfde inhoud als hierboven -->
+        <div class="playerInfo">
+            <h3 class="player-name" id="playerName2"></h3>
+            <h3 class="player-score" id="playerScore2"></h3>
+        </div>
+        <div class="pattern-lines">
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div></div>
+        </div>
+        <div class="wall">
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+        </div>
+        <div class="floor-line">
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+        </div>
+    </div>
+
+    <!-- Derde bord -->
+    <div class="azul-board" id="board3">
+        <!-- Zelfde inhoud als hierboven -->
+        <div class="playerInfo">
+            <h3 class="player-name" id="playerName3"></h3>
+            <h3 class="player-score" id="playerScore3"></h3>
+        </div>
+        <div class="pattern-lines">
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div></div>
+        </div>
+        <div class="wall">
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+        </div>
+        <div class="floor-line">
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+        </div>
+    </div>
+
+    <!-- Vierde bord -->
+    <div class="azul-board" id="board4">
+        <!-- Zelfde inhoud als hierboven -->
+        <div class="playerInfo">
+            <h3 class="player-name" id="playerName4"></h3>
+            <h3 class="player-score" id="playerScore4"></h3>
+        </div>
+        <div class="pattern-lines">
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div><div class="tile"></div></div>
+            <div class="pattern-line"><div class="tile"></div></div>
+        </div>
+        <div class="wall">
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+        </div>
+        <div class="floor-line">
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Middengebied (de fabrieken) -->
+<div class="factory-area">
+    <div class="factory-displays">
+        <!-- Fabriqueer meerdere fabrieken -->
+        <div class="factory" id="tile1">
+            <div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div>
+        </div>
+        <div class="factory" id="tile2">
+            <div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div>
+        </div>
+        <div class="factory" id="tile3">
+            <div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div>
+        </div>
+        <div class="factory" id="tile4">
+            <div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div>
+        </div>
+        <div class="factory" id="tile5">
+            <div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div>
+        </div>
+        <div class="factory" id="tile6">
+            <div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div>
+        </div>
+        <div class="factory" id="tile7">
+            <div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div>
+        </div>
+        <div class="factory" id="tile8">
+            <div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div>
+        </div>
+        <div class="factory" id="tile9">
+            <div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div><div class="factory-tile"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
