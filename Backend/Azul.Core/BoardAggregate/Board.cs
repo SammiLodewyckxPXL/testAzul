@@ -13,6 +13,15 @@ internal class Board : IBoard
     public TileSpot[,] Wall { get; private set; }
     public TileSpot[] FloorLine { get; }
     public int Score { get; private set; }
+    private static readonly TileType[,] wallPattern = new TileType[5, 5]
+{
+    { TileType.PlainBlue,     TileType.YellowRed,     TileType.PlainRed,      TileType.BlackBlue,    TileType.WhiteTurquoise },
+    { TileType.WhiteTurquoise, TileType.PlainBlue,     TileType.YellowRed,     TileType.PlainRed,     TileType.BlackBlue },
+    { TileType.BlackBlue,     TileType.WhiteTurquoise, TileType.PlainBlue,     TileType.YellowRed,    TileType.PlainRed },
+    { TileType.PlainRed,      TileType.BlackBlue,      TileType.WhiteTurquoise,TileType.PlainBlue,     TileType.YellowRed },
+    { TileType.YellowRed,     TileType.PlainRed,       TileType.BlackBlue,     TileType.WhiteTurquoise,TileType.PlainBlue }
+};
+
     public bool HasCompletedHorizontalLine
     {
         get
@@ -37,13 +46,7 @@ internal class Board : IBoard
         }
 
         Wall = new TileSpot[5, 5];
-        TileType[,] wallPattern = {
-         { TileType.PlainBlue, TileType.WhiteTurquoise, TileType.BlackBlue, TileType.PlainRed, TileType.YellowRed },
-         { TileType.WhiteTurquoise, TileType.BlackBlue, TileType.PlainRed, TileType.YellowRed, TileType.PlainBlue },
-         { TileType.BlackBlue, TileType.PlainRed, TileType.YellowRed, TileType.PlainBlue, TileType.WhiteTurquoise },
-         { TileType.PlainRed, TileType.YellowRed, TileType.PlainBlue, TileType.WhiteTurquoise, TileType.BlackBlue },
-         { TileType.YellowRed, TileType.PlainBlue, TileType.WhiteTurquoise, TileType.BlackBlue, TileType.PlainRed },
-         };
+
 
         for (int row = 0; row < 5; row++)
         {
@@ -117,7 +120,7 @@ internal class Board : IBoard
         {
             patternLine.TryAddTiles(currentType, validTiles.Count, out overflow);
         }
-        
+
         if (overflow > 0)
         {
             overflowTiles.AddRange(validTiles.Skip(validTiles.Count - overflow));
@@ -130,33 +133,6 @@ internal class Board : IBoard
 
     }
 
-
-    //public void CalculateFinalBonusScores()
-    //{
-    //    for (int row = 0; row < 5; row++)
-    //    {
-    //        if (Wall.GetRow(row).All(spot => spot.HasTile))
-    //        {
-    //            Score += 2;
-    //        }
-    //    }
-
-    //    for (int col = 0; col < 5; col++)
-    //    {
-    //        if (Wall.GetColumn(col).All(spot => spot.HasTile))
-    //        {
-    //            Score += 7;
-    //        }
-    //    }
-
-    //    foreach (TileType type in Enum.GetValues(typeof(TileType)))
-    //    {
-    //        if (Wall.Flatten().Where(spot => spot.Type == type).All(spot => spot.HasTile))
-    //        {
-    //            Score += 10;
-    //        }
-    //    }
-    //}
 
     public void CalculateFinalBonusScores()
     {
@@ -178,48 +154,29 @@ internal class Board : IBoard
             }
         }
 
-        // Bonus voor volledig voltooide kleuren (op exact de juiste plekken!)
-        TileType[,] wallPattern = {
-        { TileType.PlainBlue, TileType.WhiteTurquoise, TileType.BlackBlue, TileType.PlainRed, TileType.YellowRed },
-        { TileType.WhiteTurquoise, TileType.BlackBlue, TileType.PlainRed, TileType.YellowRed, TileType.PlainBlue },
-        { TileType.BlackBlue, TileType.PlainRed, TileType.YellowRed, TileType.PlainBlue, TileType.WhiteTurquoise },
-        { TileType.PlainRed, TileType.YellowRed, TileType.PlainBlue, TileType.WhiteTurquoise, TileType.BlackBlue },
-        { TileType.YellowRed, TileType.PlainBlue, TileType.WhiteTurquoise, TileType.BlackBlue, TileType.PlainRed },
-    };
+        // Bonus voor volledig voltooide kleuren (alleen als ze op de juiste plekken liggen)
         foreach (TileType type in Enum.GetValues(typeof(TileType)))
         {
-            bool completeColor = true;
-
-            // Loop door het muurpatroon
-            for (int row = 0; row < 5; row++)
+            if (type == TileType.StartingTile) continue;//slaagt de startintile over
+            bool complete = true;
+            for (int row = 0; row < 5 && complete; row++)
             {
                 for (int col = 0; col < 5; col++)
                 {
-                    // Als dit het patroon is voor de huidige kleur
-                    if (wallPattern[row, col] == type)
+                    if (wallPattern[row, col] == type && !Wall[row, col].HasTile)
                     {
-                        // Controleer of er een tegel op de juiste plek ligt
-                        if (!Wall[row, col].HasTile)
-                        {
-                            completeColor = false;
-                            break; // We stoppen hier als de kleur niet op de juiste plek ligt
-                        }
+                        complete = false;
+                        break;
                     }
                 }
-
-                // Als een kleur niet compleet is, breek dan uit de outer loop
-                if (!completeColor) break;
             }
 
-            // Als het patroon van de kleur volledig is, voeg dan de bonus toe
-            if (completeColor)
+            if (complete)
             {
                 Score += 10;
             }
         }
-
     }
-
 
     public void DoWallTiling(ITileFactory tileFactory)
     {
@@ -230,63 +187,85 @@ internal class Board : IBoard
                 var tileType = patternLine.TileType;
                 int rowIndex = Array.IndexOf(PatternLines, patternLine);
                 int colIndex = Array.FindIndex(Wall.GetRow(rowIndex), spot => spot.Type == tileType);
-                if (!Wall[rowIndex, colIndex].HasTile)
+
+                if (colIndex >= 0 && !Wall[rowIndex, colIndex].HasTile)
                 {
+                    // Plaats tegel op de muur
                     Wall[rowIndex, colIndex].PlaceTile(tileType!.Value);
-                    Score += CalculateScoreForTile(rowIndex, colIndex);
+
+                    // Bereken en update de score
+                    int scoreForThisTile = CalculateScoreForTile(rowIndex, colIndex);
+                    Score += scoreForThisTile;
+
+                    // Verplaats overtollige tegels naar de fabriek
+                    int excessTiles = patternLine.NumberOfTiles - 1;
+                    if (excessTiles > 0)
+                    {
+                        Console.WriteLine($"Overflow tiles to factory: {excessTiles}"); // Log overflow
+                        for (int i = 0; i < excessTiles; i++)
+                        {
+                            tileFactory.AddToUsedTiles(tileType.Value);
+                        }
+                    }
                 }
 
-                //Score += CalculateScoreForTile(rowIndex, colIndex);
-
+                // Maak patroonlijn leeg
                 patternLine.Clear();
             }
         }
 
-        foreach (var spot in FloorLine)
+        // Verwerk tegels op de vloerlijn en trek strafpunten af
+        int[] floorLinePenalties = { 1, 1, 2, 2, 2, 3, 3 }; // Strafpunten per positie in de vloerregel
+        for (int i = 0; i < FloorLine.Length; i++)
         {
+            var spot = FloorLine[i];
             if (spot.HasTile)
             {
-                tileFactory.AddToUsedTiles(spot.Type!.Value);
+                if (spot.Type != TileType.StartingTile)
+                {
+                    // Alleen niet-starting tiles toevoegen aan de gebruikte tegels
+                    tileFactory.AddToUsedTiles(spot.Type!.Value);
+                }
                 spot.Clear();
+                Score -= floorLinePenalties[i]; // Strafpunten aftrekken
             }
         }
     }
 
     private int CalculateScoreForTile(int row, int col)
     {
-        int score = 1;
-
-        // Check row connections
-        int left = col - 1;
-        while (left >= 0 && Wall[row, left].HasTile)
+        // Horizontale score: tel aaneengesloten tegels in de rij
+        int horizontal = 1; // Start met 1 voor de geplaatste tegel
+                            // Naar links
+        for (int c = col - 1; c >= 0 && Wall[row, c].HasTile; c--)
         {
-            score++;
-            left--;
+            horizontal++;
+        }
+        // Naar rechts
+        for (int c = col + 1; c < 5 && Wall[row, c].HasTile; c++)
+        {
+            horizontal++;
         }
 
-        int right = col + 1;
-        while (right < 5 && Wall[row, right].HasTile)
+        // Verticale score: tel aaneengesloten tegels in de kolom
+        int vertical = 1; // Start met 1 voor de geplaatste tegel
+                          // Naar boven
+        for (int r = row - 1; r >= 0 && Wall[r, col].HasTile; r--)
         {
-            score++;
-            right++;
+            vertical++;
         }
-
-        // Check column connections
-        int up = row - 1;
-        while (up >= 0 && Wall[up, col].HasTile)
+        // Naar onder
+        for (int r = row + 1; r < 5 && Wall[r, col].HasTile; r++)
         {
-            score++;
-            up--;
+            vertical++;
         }
+        // Bepaal de totale score
+        int totalScore = 0;
+        if (horizontal > 1) totalScore += horizontal;
+        if (vertical > 1) totalScore += vertical;
+        if (totalScore == 0) totalScore = 1; // Minimaal 1 punt
 
-        int down = row + 1;
-        while (down < 5 && Wall[down, col].HasTile)
-        {
-            score++;
-            down++;
-        }
-
-        return score;
+        return totalScore;
     }
 }
 

@@ -25,7 +25,7 @@ internal class PlayerBase: IPlayer
         Id = id;
         Name = name;
         LastVisitToPortugal = lastVisitToPortugal;
-        Board = new Board();  //pas als board is geimplementeerd
+        Board = new Board();
         HasStartingTile = false;
         TilesToPlace = new List<TileType>();
     }

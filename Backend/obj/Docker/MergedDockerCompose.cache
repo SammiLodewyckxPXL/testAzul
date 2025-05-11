@@ -21,31 +21,6 @@ services:
         target: 8081
         published: "5051"
         protocol: tcp
-    volumes:
-      - type: bind
-        source: C:\Users\lenovo\AppData\Roaming/Microsoft/UserSecrets
-        target: /home/app/.microsoft/usersecrets
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Users\lenovo\AppData\Roaming/Microsoft/UserSecrets
-        target: /root/.microsoft/usersecrets
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Users\lenovo\AppData\Roaming/ASP.NET/Https
-        target: /home/app/.aspnet/https
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Users\lenovo\AppData\Roaming/ASP.NET/Https
-        target: /root/.aspnet/https
-        read_only: true
-        bind:
-          create_host_path: true
   sqldata:
     environment:
       ACCEPT_EULA: "Y"

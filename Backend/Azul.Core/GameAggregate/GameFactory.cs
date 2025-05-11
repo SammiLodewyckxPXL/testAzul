@@ -26,7 +26,7 @@ internal class GameFactory : IGameFactory
         int numberOfDisplays = table.Preferences.NumberOfFactoryDisplays;
         var tileFactory = new TileFactory(numberOfDisplays, bag);
         Console.WriteLine(bag.Tiles.Count);
-        tileFactory.FillDisplays();
+        //tileFactory.FillDisplays();
         Console.WriteLine(bag.Tiles.Count);
         var game = new Game(Guid.NewGuid(), tileFactory, players);
         return game;

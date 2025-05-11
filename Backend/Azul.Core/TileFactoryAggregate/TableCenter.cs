@@ -38,4 +38,9 @@ internal class TableCenter : ITableCenter
         takenTiles.Reverse();
         return takenTiles.AsReadOnly();
     }
+    public void Clear()
+    {
+        _tiles.Clear();
+    }
+
 }

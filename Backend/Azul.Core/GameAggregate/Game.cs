@@ -14,6 +14,7 @@ internal class Game : IGame
     private Guid _playerToPlayId;
     private int _roundNumber;
     private bool _hasEnded;
+    private Guid? _startingTilePlayerId;
 
     public Game(Guid id, ITileFactory tileFactory, IPlayer[] players)
     {
@@ -27,9 +28,9 @@ internal class Game : IGame
         _playerToPlayId = players
             .OrderByDescending(p => p.LastVisitToPortugal ?? DateOnly.MinValue)
             .First().Id;
-
-        _tileFactory.TableCenter.AddStartingTile();
         _tileFactory.FillDisplays();
+        _tileFactory.TableCenter.AddStartingTile();
+        
     }
 
     public Guid Id => _id;
@@ -61,10 +62,11 @@ internal class Game : IGame
         var tiles = _tileFactory.TakeTiles(displayId, tileType);
         player.TilesToPlace.AddRange(tiles);
 
-        if (tiles.Contains(TileType.StartingTile))
+        if (player.TilesToPlace.Contains(TileType.StartingTile))
         {
             player.HasStartingTile = true;
         }
+
     }
 
     public void PlaceTilesOnPatternLine(Guid playerId, int patternLineIndex)
@@ -82,6 +84,10 @@ internal class Game : IGame
         }
 
         player.Board.AddTilesToPatternLine(player.TilesToPlace, patternLineIndex, _tileFactory);
+
+        RegisterStartingTile(player);
+
+
         player.TilesToPlace.Clear();
 
         if (_tileFactory.IsEmpty)
@@ -103,8 +109,16 @@ internal class Game : IGame
 
             _roundNumber++;
 
-            var starter = _players.First(p => p.HasStartingTile);
-            _playerToPlayId = starter.Id;
+            if (_startingTilePlayerId.HasValue)
+            {
+                _playerToPlayId = _startingTilePlayerId.Value;
+                _startingTilePlayerId = null;
+            }
+            else
+            {
+                var starter = _players.First(p => p.HasStartingTile);
+                _playerToPlayId = starter.Id;
+            }
 
             foreach (var p in _players)
             {
@@ -129,9 +143,55 @@ internal class Game : IGame
             throw new InvalidOperationException("It's not this player's turn.");
         }
 
+        RegisterStartingTile(player);
+
         player.Board.AddTilesToFloorLine(player.TilesToPlace, _tileFactory);
         player.TilesToPlace.Clear();
-        SwitchTurn();
+
+        if (_tileFactory.IsEmpty)
+        {
+            foreach (var p in _players)
+            {
+                p.Board.DoWallTiling(_tileFactory);
+            }
+
+            if (_players.Any(p => p.Board.HasCompletedHorizontalLine))
+            {
+                foreach (var p in _players)
+                {
+                    p.Board.CalculateFinalBonusScores();
+                }
+                _hasEnded = true;
+                return;
+            }
+
+            _roundNumber++;
+
+            if (_startingTilePlayerId.HasValue)
+            {
+                _playerToPlayId = _startingTilePlayerId.Value;
+                _startingTilePlayerId = null;
+            }
+            else
+            {
+                var starter = _players.First(p => p.HasStartingTile);
+                _playerToPlayId = starter.Id;
+            }
+
+            foreach (var p in _players)
+            {
+                p.HasStartingTile = false;
+            }
+
+            _tileFactory.TableCenter.AddStartingTile();
+            _tileFactory.FillDisplays();
+        }
+        else
+        {
+            SwitchTurn();
+        }
+
+
     }
 
     private IPlayer GetPlayer(Guid id)
@@ -145,4 +205,13 @@ internal class Game : IGame
         var nextIndex = (currentIndex + 1) % _players.Length;
         _playerToPlayId = _players[nextIndex].Id;
     }
+    private void RegisterStartingTile(IPlayer player)
+    {
+        if (player.TilesToPlace.Contains(TileType.StartingTile) && _startingTilePlayerId == null)
+        {
+            _startingTilePlayerId = player.Id;
+            _tileFactory.AddToUsedTiles(TileType.StartingTile);
+        }
+    }
+
 }

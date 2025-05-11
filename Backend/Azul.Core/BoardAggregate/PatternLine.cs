@@ -1,8 +1,5 @@
 ﻿using Azul.Core.BoardAggregate.Contracts;
 using Azul.Core.TileFactoryAggregate.Contracts;
-using System;
-
-namespace Azul.Core.BoardAggregate;
 
 internal class PatternLine : IPatternLine
 {
@@ -27,13 +24,14 @@ internal class PatternLine : IPatternLine
         NumberOfTiles = 0;
     }
 
-    public void TryAddTiles(TileType type, int numberOfTilesToAdd, out int remainingNumberOfTiles)
+    public void TryAddTiles(TileType type, int numberOfTilesToAdd, out int remainingTilesToAdd)
     {
         if (IsComplete)
         {
             throw new InvalidOperationException("Cannot add tiles to a complete pattern line.");
         }
 
+        // Check if tile type already exists and handle accordingly
         if (TileType != null && TileType != type)
         {
             throw new InvalidOperationException("Pattern line already contains a different tile type.");
@@ -48,6 +46,6 @@ internal class PatternLine : IPatternLine
         int tilesToAdd = Math.Min(spaceLeft, numberOfTilesToAdd);
         NumberOfTiles += tilesToAdd;
 
-        remainingNumberOfTiles = numberOfTilesToAdd - tilesToAdd;
+        remainingTilesToAdd = numberOfTilesToAdd - tilesToAdd;
     }
 }

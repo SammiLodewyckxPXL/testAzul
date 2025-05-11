@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Azul.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1c481eaa34d52f0b99569779a9f4f11b846cea4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b95a7da00675b78c3cf6e0dfcb9d7f940041e4d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Azul.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Azul.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

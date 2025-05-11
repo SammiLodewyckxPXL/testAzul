@@ -90,7 +90,20 @@ internal class TileFactory : ITileFactory
                 remainingTiles.Add(tile);
         }
 
-        display.AddTiles(Array.Empty<TileType>());
+        //display.AddTiles(Array.Empty<TileType>());
+        switch (display)
+        {
+            case FactoryDisplay factoryDisplay:
+                factoryDisplay.Clear();
+                break;
+
+            case TableCenter tableCenter:
+                tableCenter.Clear();
+                break;
+
+            default:
+                throw new InvalidOperationException("Unknown display type.");
+        }
 
         if (display is ITableCenter)
         {
