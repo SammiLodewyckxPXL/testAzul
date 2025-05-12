@@ -176,6 +176,10 @@ internal class Board : IBoard
                 Score += 10;
             }
         }
+        if (Score < 0)
+        {
+            Score = 0;
+        }
     }
 
     public void DoWallTiling(ITileFactory tileFactory)
@@ -264,7 +268,10 @@ internal class Board : IBoard
         if (horizontal > 1) totalScore += horizontal;
         if (vertical > 1) totalScore += vertical;
         if (totalScore == 0) totalScore = 1; // Minimaal 1 punt
-
+        if (totalScore <0)
+        {
+            totalScore = 0;
+        }
         return totalScore;
     }
 }

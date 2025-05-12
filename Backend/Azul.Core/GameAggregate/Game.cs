@@ -90,7 +90,7 @@ internal class Game : IGame
 
         player.TilesToPlace.Clear();
 
-        if (_tileFactory.IsEmpty)
+        if (_tileFactory.IsEmpty && _players.All(p => p.TilesToPlace.Count == 0))
         {
             foreach (var p in _players)
             {
@@ -148,7 +148,7 @@ internal class Game : IGame
         player.Board.AddTilesToFloorLine(player.TilesToPlace, _tileFactory);
         player.TilesToPlace.Clear();
 
-        if (_tileFactory.IsEmpty)
+        if (_tileFactory.IsEmpty && _players.All(p => p.TilesToPlace.Count == 0))
         {
             foreach (var p in _players)
             {
@@ -202,9 +202,16 @@ internal class Game : IGame
     private void SwitchTurn()
     {
         var currentIndex = Array.FindIndex(_players, p => p.Id == _playerToPlayId);
+        if (currentIndex == -1)
+        {
+            throw new InvalidOperationException("Current player ID not found in player list.");
+        }
+
         var nextIndex = (currentIndex + 1) % _players.Length;
+        Console.WriteLine($"SwitchTurn: From Player {_playerToPlayId} (Index {currentIndex}) to Player {_players[nextIndex].Id} (Index {nextIndex}).");
         _playerToPlayId = _players[nextIndex].Id;
     }
+
     private void RegisterStartingTile(IPlayer player)
     {
         if (player.TilesToPlace.Contains(TileType.StartingTile) && _startingTilePlayerId == null)

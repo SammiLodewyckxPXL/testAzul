@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Azul.Bootstrapper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b95a7da00675b78c3cf6e0dfcb9d7f940041e4d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b25db5bdba1eb552690b29b43596d644c1c1b07")]
 [assembly: System.Reflection.AssemblyProductAttribute("Azul.Bootstrapper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Azul.Bootstrapper")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
