@@ -1,0 +1,33 @@
+name: php-webadv
+services:
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./www:/var/www/html
+    ports:
+      - 8000:80
+    depends_on:
+      - mysql-db
+    environment:
+      SERVER_NAME: localhost
+      XDEBUG_CONFIG: "client_host=host.docker.internal"
+  mysql-db:
+    image: mysql:8.3
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: database_webadv
+      MYSQL_USER: user
+      MYSQL_PASSWORD: resu
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql-db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql-db
+      MYSQL_ROOT_PASSWORD: toor

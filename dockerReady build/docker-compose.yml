@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: sammilodewykx/projectazul-frontend:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - azul-network
+
+  backend:
+    image: sammilodewykx/projectazul-backend:latest
+    ports:
+      - "5051:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__AzulDbConnection=Server=db;Database=AzulDb;User Id=sa;Password=Your_password123;TrustServerCertificate=True;
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - azul-network
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Your_password123
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+    networks:
+      - azul-network
+
+networks:
+  azul-network:
+    driver: bridge
+
+volumes:
+  sqldata: 

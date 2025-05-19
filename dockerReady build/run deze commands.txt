@@ -1,0 +1,7 @@
+docker tag project-2425-azul-azul21-frontend sammilodewykx/projectazul-frontend:latest
+
+docker tag project-2425-azul-azul21-backend sammilodewykx/projectazul-backend:latest
+
+docker push sammilodewykx/projectazul-frontend:latest
+
+docker push sammilodewykx/projectazul-backend:latest

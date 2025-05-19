@@ -1,0 +1,26 @@
+1)docker compose up
+
+2)http://localhost:8081/
+
+3)run composer install in project
+
+3.5) verwijder de ";" uit C:\php-8.4.5\php.ini
+
+4)run de sql van discord
+
+5)php bin/console make:migration
+
+6)php bin/console doctrine:migrations:migrate
+
+7)symfony server start
+
+8)open http://127.0.0.1:8000/
+
+9)
+
+10)
+
+11)
+
+12)
+
