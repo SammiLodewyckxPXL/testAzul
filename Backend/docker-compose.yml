@@ -1,0 +1,6 @@
+services:
+  azul.api:
+    image: ${DOCKER_REGISTRY-}azulapi
+    build:
+      context: .
+      dockerfile: Azul.Api/Dockerfile
