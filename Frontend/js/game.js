@@ -169,7 +169,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
     async function getGameData() {
         try {
-            const response = await fetch(`http://localhost:5051/api/games/${tableData.gameId}`, {
+            const response = await fetch(`/api/games/${tableData.gameId}`, {
                 method: "GET",
                 headers: {
                     'Authorization': "Bearer " + token
@@ -216,7 +216,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     }
 
     try {
-        const response = await fetch(`http://localhost:5051/api/Tables/${tableId}`, {
+        const response = await fetch(`/api/Tables/${tableId}`, {
             method: "GET",
             headers: {
                 'Authorization': "Bearer " + token
@@ -279,7 +279,7 @@ window.addEventListener("DOMContentLoaded", async function () {
                             });
 
                             try {
-                                const response = await fetch(`http://localhost:5051/api/games/${tableData.gameId}/take-tiles`, {
+                                const response = await fetch(`/api/games/${tableData.gameId}/take-tiles`, {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json',
@@ -544,7 +544,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             }
 
             try {
-                const response = await fetch(`http://localhost:5051/api/Games/${gameId}/place-tiles-on-floorline`, {
+                const response = await fetch(`/api/Games/${gameId}/place-tiles-on-floorline`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -696,7 +696,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
                     try {
                         // Place tiles on pattern line
-                        const response = await fetch(`http://localhost:5051/api/games/${gameId}/place-tiles-on-patternline`, {
+                        const response = await fetch(`/api/games/${gameId}/place-tiles-on-patternline`, {
                             method: "POST",
                             headers: {
                                 'Content-Type': 'application/json',
@@ -901,7 +901,7 @@ window.addEventListener("DOMContentLoaded", async function () {
                     selectedCountContainer.style.color = color;
 
                     try {
-                        const response = await fetch(`http://localhost:5051/api/games/${gameData.id}/take-tiles`, {
+                        const response = await fetch(`/api/games/${gameData.id}/take-tiles`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

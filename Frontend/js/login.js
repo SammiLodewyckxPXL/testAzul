@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         try {
-            let response = await fetch("http://localhost:5051/api/Authentication/token", {
+            let response = await fetch("/api/Authentication/token", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(requestBody)

@@ -16,7 +16,7 @@ document.getElementById("startGame").addEventListener("click", async function() 
 
 
     try {
-        const response = await fetch('http://localhost:5051/api/Tables/join-or-create', {
+        const response = await fetch('/api/Tables/join-or-create', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -59,7 +59,7 @@ async function getTableInfo() {
         let totalSeats;
         let occupiedSeats;
         try {
-            const response = await fetch(`http://localhost:5051/api/Tables/${table.id}`, {
+            const response = await fetch(`/api/Tables/${table.id}`, {
                 method: "GET",
                 headers: {
                     'Authorization': "Bearer " + token
@@ -93,7 +93,7 @@ document.getElementById("leaveTable").addEventListener("click", async function (
     const token = sessionStorage.getItem('authToken');
 
     try {
-        const response = await fetch(`http://localhost:5051/api/Tables/${currentTableId}/leave`, {
+        const response = await fetch(`/api/Tables/${currentTableId}/leave`, {
             method: "POST",
             headers: {
                 'Authorization': "Bearer " + token
